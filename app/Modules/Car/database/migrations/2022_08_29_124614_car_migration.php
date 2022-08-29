@@ -13,11 +13,14 @@ class CarMigration extends Migration
      */
     public function up()
     {
-        Schema::create('car', function (Blueprint $table) {
+         Schema::create('cars', function (Blueprint $table) {
             $table->bigIncrements("id");
+            $table->foreignId('IdCarRange');
             $table->string("Label");
             $table->string("CarImage");
 
+            $table->foreign('IdCarRange')->references('id')->on('carranges')
+                    ->onDelete('cascade');
 
             $table->timestamps();
         });

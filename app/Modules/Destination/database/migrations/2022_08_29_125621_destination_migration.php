@@ -13,7 +13,7 @@ class DestinationMigration extends Migration
      */
     public function up()
     {
-        Schema::create('destination', function (Blueprint $table) {
+        Schema::create('destinations', function (Blueprint $table) {
             $table->bigIncrements("id");
             $table->string("Label");
 

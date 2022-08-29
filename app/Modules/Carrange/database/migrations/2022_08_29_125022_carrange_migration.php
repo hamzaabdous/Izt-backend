@@ -13,12 +13,12 @@ class CarrangeMigration extends Migration
      */
     public function up()
     {
-        Schema::create('carrange', function (Blueprint $table) {
+        Schema::create('carranges', function (Blueprint $table) {
             $table->bigIncrements("id");
             $table->string("Label");
             $table->integer("MinPassengers");
-            $table->string("MaxPassengers");
-            $table->string("PricePercentage");
+            $table->integer("MaxPassengers");
+            $table->integer("PricePercentage");
 
 
             $table->timestamps();
