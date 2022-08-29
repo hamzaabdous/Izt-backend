@@ -40,14 +40,6 @@ class DestinationcarrangesController extends Controller
                 "status"=>"Depart_404",
             ];
         }
-        /*  $destinationDestination=Destination::find($request->IdDestination);
-        if(!$destinationDestination){
-            return [
-                "payload"=>"Destination is not exist !",
-                "status"=>"Destination_404",
-            ];
-        } */
-
 
         $destinationDepart->carrange()->attach('carrange_id', [
             //you can pass any other pivot filed value you want in here
@@ -68,6 +60,22 @@ class DestinationcarrangesController extends Controller
             "payload" => $data,
             "status" => "200"
         ];
+    }
+
+    public function deleteDestinationcarrangesBydestination_id(Request $request){
+        /* DB::table('destinationcarranges')
+            ->where('carrange_id','=', $request->carrange_id)
+            ->where('IdDepart', '=', $request->IdDepart)
+            ->where('destination_id', '=', $request->destination_id)
+            ->delete(); */
+            DB::table('destinationcarranges')
+            ->where('id','=', $request->id)
+            ->delete();
+            return [
+                "payload" => "Deleted successfully",
+                "status" => "200_4"
+            ];
+
     }
 
 }
