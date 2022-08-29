@@ -9,6 +9,8 @@ use Illuminate\Support\Facades\DB;
 
 use App\Modules\Destination\Models\Destination;
 use App\Modules\Carrange\Models\Carrange;
+use App\Modules\Destination\Models\Destinationcarranges;
+
 use \stdClass;
 
 class DestinationcarrangesController extends Controller
@@ -63,17 +65,38 @@ class DestinationcarrangesController extends Controller
     }
 
     public function deleteDestinationcarrangesBydestination_id(Request $request){
-        /* DB::table('destinationcarranges')
-            ->where('carrange_id','=', $request->carrange_id)
-            ->where('IdDepart', '=', $request->IdDepart)
-            ->where('destination_id', '=', $request->destination_id)
-            ->delete(); */
+
             DB::table('destinationcarranges')
             ->where('id','=', $request->id)
             ->delete();
             return [
                 "payload" => "Deleted successfully",
                 "status" => "200_4"
+            ];
+
+    }
+
+    public function getdestination_carranges_by_destination_id(){
+        $destinationcarranges=Destinationcarranges::all();
+        $Data=[];
+
+        for ($i=0; $i <count($destinationcarranges) ; $i++) {
+
+            array_push($Data,[
+                "id"=>$destinationcarranges[$i]->id,
+                "Price" => $destinationcarranges[$i]->Price,
+                 "reservation"=>$destinationcarranges[$i],
+                 "Depart" => Destination::find($destinationcarranges[$i]->IdDepart),
+                 "destination" => Destination::find($destinationcarranges[$i]->destination_id),
+                 "Carrange" => Carrange::find($destinationcarranges[$i]->carrange_id),
+
+             ]);
+           }
+
+
+            return [
+                "payload" => $Data,
+                "status" => "200_1"
             ];
 
     }

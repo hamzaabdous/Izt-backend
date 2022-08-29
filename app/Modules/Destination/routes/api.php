@@ -26,5 +26,6 @@ Route::group([
 
     Route::post('/addDestinationcarranges', [DestinationcarrangesController::class, 'addDestinationcarranges']);
     Route::post('/deleteDestinationcarrangesBydestination_id', [DestinationcarrangesController::class, 'deleteDestinationcarrangesBydestination_id']);
+    Route::get('/getdestination_carranges_by_destination_id', [DestinationcarrangesController::class, 'getdestination_carranges_by_destination_id']);
 
 });

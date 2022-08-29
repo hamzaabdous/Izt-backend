@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
 use App\Modules\Reservation\Models\Reservation;
+use App\Modules\Destination\Models\Destination;
+use App\Modules\Carrange\Models\Carrange;
 
 class ReservationController extends Controller
 {
@@ -15,9 +17,20 @@ class ReservationController extends Controller
     {
         $reservation = Reservation::with('destination_carranges')->get();
        // $reservation->destination_id=$reservation->destination_carranges->destination_id;
+       $Data=[];
+       for ($i=0; $i <count($reservation) ; $i++) {
 
-       return [
-            "payload" => $reservation,
+        array_push($Data,[
+             "reservation"=>$reservation[$i],
+             "destination_carranges" => $reservation[$i]->destination_carranges,
+             "Depart" => Destination::find($reservation[$i]->destination_carranges->IdDepart),
+             "Destination_" => Destination::find($reservation[$i]->destination_carranges->destination_id),
+             "Carrange" => Carrange::find($reservation[$i]->destination_carranges->carrange_id),
+
+         ]);
+       }
+        return [
+            "payload" => $Data,
             "status" => "200_00"
         ];
     }
@@ -33,7 +46,9 @@ class ReservationController extends Controller
         }
         else {
             $reservation->destination_carranges=$reservation->destination_carranges;
-            $reservation->destination_id=$reservation->destination_carranges->destination_id;
+            $reservation->Depart=Destination::find($reservation->destination_carranges->IdDepart);
+            $reservation->Destination=Destination::find($reservation->destination_carranges->destination_id);
+            $reservation->carrange=Carrange::find($reservation->destination_carranges->carrange_id);
 
             return [
                 "payload" => $reservation,
