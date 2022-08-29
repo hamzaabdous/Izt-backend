@@ -20,12 +20,12 @@ class Carrange extends Model
 
     public function destinationIdDepart()
     {
-        return $this->belongsToMany(Destination::class,"IdDepart")->withTimestamps();
+        return $this->belongsToMany(Destination::class,"destinationcarranges")->withTimestamps();
 
     }
     public function destinationIdDestination()
     {
-        return $this->belongsToMany(Destination::class,"IdDestination")->withTimestamps();
+        return $this->belongsToMany(Destination::class,"destinationcarranges")->withTimestamps();
 
     }
 
@@ -35,7 +35,7 @@ class Carrange extends Model
         'MinPassengers',
         'MaxPassengers',
         'PricePercentage',
-        
+
     ];
 
     protected $casts = [

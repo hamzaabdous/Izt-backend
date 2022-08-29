@@ -18,16 +18,16 @@ class DestinationcarrangeMigration extends Migration
             $table->string("Price");
 
 
-            $table->bigInteger('IdCarRange')->unsigned();
-            $table->foreign('IdCarRange')->references('id')->on('carranges')
+            $table->bigInteger('carrange_id')->unsigned();
+            $table->foreign('carrange_id')->references('id')->on('carranges')
                     ->onDelete('cascade');
 
             $table->bigInteger('IdDepart')->unsigned();
             $table->foreign('IdDepart')->references('id')->on('destinations')
                     ->onDelete('cascade');
 
-            $table->bigInteger('IdDestination')->unsigned();
-            $table->foreign('IdDestination')->references('id')->on('destinations')
+            $table->bigInteger('destination_id')->unsigned();
+            $table->foreign('destination_id')->references('id')->on('destinations')
 
                     ->onDelete('cascade');
 

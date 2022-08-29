@@ -13,7 +13,7 @@ class Destination extends Model
 
     public function carrange()
     {
-        return $this->belongsToMany(Carrange::class,"IdCarRange")->withTimestamps();
+        return $this->belongsToMany(Carrange::class,"destinationcarranges")->withTimestamps();
 
     }
 
