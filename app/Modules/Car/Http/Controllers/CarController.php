@@ -52,6 +52,7 @@ class CarController extends Controller
         }
         $car=Car::make($request->all());
         $car->save();
+        $car->carrange=$car->carrange;
         return [
             "payload" => $car,
             "status" => "200"
@@ -80,6 +81,7 @@ class CarController extends Controller
         $car->IdCarRange=$request->IdCarRange;
         $car->CarImage=$request->CarImage;
         $car->save();
+        $car->carrange=$car->carrange;
         return [
             "payload" => $car,
             "status" => "200"

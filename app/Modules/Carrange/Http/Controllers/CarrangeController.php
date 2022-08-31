@@ -54,6 +54,7 @@ class CarrangeController extends Controller
         }
         $carrange=Carrange::make($request->all());
         $carrange->save();
+        $carrange->car=$carrange->car;
         return [
             "payload" => $carrange,
             "status" => "200"

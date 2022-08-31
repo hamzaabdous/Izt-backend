@@ -38,7 +38,7 @@ class DestinationController extends Controller
 
     public function create(Request $request){
         $validator = Validator::make($request->all(), [
-            "Label" => "required|string|unique:cars,Label",
+            "Label" => "required|string:cars,Label",
             "CarImage" => "string:cars,CarImage",
         ]);
         if ($validator->fails()) {
