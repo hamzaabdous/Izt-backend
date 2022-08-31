@@ -23,9 +23,9 @@ Route::group([
     'prefix' => 'api/destinationcarranges'
 
 ], function ($router) {
-
+    Route::post('/UpdateDestinationcarrangesByid', [DestinationcarrangesController::class, 'UpdateDestinationcarrangesByid']);
     Route::post('/addDestinationcarranges', [DestinationcarrangesController::class, 'addDestinationcarranges']);
-    Route::post('/deleteDestinationcarrangesBydestination_id', [DestinationcarrangesController::class, 'deleteDestinationcarrangesBydestination_id']);
+    Route::post('/deleteDestinationcarrangesBydestination_id', [DestinationcarrangesController::class, 'deleteDestinationcarrangesByid']);
     Route::get('/getdestination_carranges_by_destination_id', [DestinationcarrangesController::class, 'getdestination_carranges_by_destination_id']);
 
 });
