@@ -75,9 +75,36 @@ class ReservationController extends Controller
         }
         $reservation=Reservation::make($request->all());
         $reservation->save();
+        $Data=[];
+        array_push($Data,[
+            "reservation"=>$reservation,
+            "destination_carranges" => $reservation->destination_carranges,
+            "Depart" => Destination::find($reservation->destination_carranges->IdDepart),
+            "Destination_" => Destination::find($reservation->destination_carranges->destination_id),
+            "Carrange" => Carrange::find($reservation->destination_carranges->carrange_id),
+
+        ]);
         return [
-            "payload" => $reservation,
+            "payload" => $Data[0],
             "status" => "200"
         ];
     }
+
+    public function delete(Request $request){
+        $reservation=Reservation::find($request->id);
+        if(!$reservation){
+            return [
+                "payload" => "The searched row does not exist !",
+                "status" => "404_4"
+            ];
+        }
+        else {
+            $reservation->delete();
+            return [
+                "payload" => "Deleted successfully",
+                "status" => "200_4"
+            ];
+        }
+    }
+
 }

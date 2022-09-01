@@ -83,7 +83,7 @@ class UserController extends Controller
         }
 
         $user=User::make($request->all());
-        $user->password="admin123";
+       // $user->password="admin123";
         $user->save();
 
         return [
