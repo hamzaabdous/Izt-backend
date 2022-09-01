@@ -51,6 +51,11 @@ class CarController extends Controller
             ];
         }
         $car=Car::make($request->all());
+        $filename = $request->image->getClientOriginalName();
+        $request->image->storeAs('images',$filename,'public');
+      //  $car()->update(['CarImage'=>$filename]);
+        $car->CarImage="/storage/images/".$filename;
+
         $car->save();
         $car->carrange=$car->carrange;
         return [
