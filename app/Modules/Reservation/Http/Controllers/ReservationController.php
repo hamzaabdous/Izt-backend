@@ -35,6 +35,33 @@ class ReservationController extends Controller
         ];
     }
 
+    public function SearchOffre(Request $request)
+    {
+
+        $reservation = Reservation::with('destination_carranges')->get();
+       // $reservation->destination_id=$reservation->destination_carranges->destination_id;
+       $Data=[];
+       for ($i=0; $i <count($reservation) ; $i++) {
+
+        if ($reservation[$i]->NbrPersons==$request->NbrPersons && $reservation[$i]->destination_carranges->IdDepart==$request->IdDepart && $reservation[$i]->destination_carranges->destination_id==$request->destination_id) {
+
+            $carrange=Carrange::find($reservation[$i]->destination_carranges->carrange_id);
+            $car=$carrange->car[0];
+            array_push($Data,[
+                "IdDestinationCarRange"=>$reservation[$i]->IdDestinationCarRange,
+                "Prix" => $reservation[$i]->destination_carranges->Price + $reservation[$i]->destination_carranges->Price*($carrange->PricePercentage/100),
+                "Label" => $car->Label,
+                "CarImage" => $car->CarImage,
+
+            ]);
+        }
+       }
+        return [
+            "payload" => $Data,
+            "status" => "200_00"
+        ];
+    }
+
     public function get($id)
     {
         $reservation=Reservation::find($id);

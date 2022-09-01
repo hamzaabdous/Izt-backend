@@ -54,6 +54,8 @@ class CarrangeController extends Controller
         }
         $carrange=Carrange::make($request->all());
         $carrange->save();
+        $carrange->PricePercentage=$request->PricePercentage/100;
+
         $carrange->car=$carrange->car;
         return [
             "payload" => $carrange,

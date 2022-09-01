@@ -14,5 +14,6 @@ Route::group([
     Route::post('/create', [ReservationController::class, 'create']);
     Route::post('/update', [ReservationController::class, 'update']);
     Route::post('/delete', [ReservationController::class, 'delete']);
+    Route::post('/SearchOffre', [ReservationController::class, 'SearchOffre']);
 
 });
